@@ -113,8 +113,8 @@ void index_all_files(string base_path) {
 }
 
 void test_serialization() {
-    serialize(inv_index, "test_index_serialization");
-    map<string, vector<string> > deserialized = deserialize("test_index_serialization");
+    serialize(inv_index, "test");
+    map<string, vector<string> > deserialized = deserialize("test");
     for (std::map<string,vector<string> >::iterator it=inv_index.begin(); it!=inv_index.end(); ++it) {
 	vector<string> v1 = it->second;
 	vector<string> v2 = deserialized[it->first];
