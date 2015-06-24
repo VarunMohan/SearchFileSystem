@@ -45,7 +45,6 @@ void index_file(string file_path) {
         in >> s;
         std::transform(s.begin(), s.end(), s.begin(), ::tolower);
         s.erase(std::remove_if(s.begin(), s.end(), is_alphanum), s.end());
-        if (s.size() == 0) continue;
         if (inv_index.count(s) == 0) {
             vector<string> v;
             v.push_back(file_path);
@@ -95,7 +94,7 @@ void index_all_files(string base_path) {
     vector<string> all_files;
     get_all_files(base_path, all_files);
     for (int i = 0; i < all_files.size(); i++) {
-        index_file(all_files[i]);
+        index_file(base_path + "/" + all_files[i]);
     }
 }
 
@@ -105,7 +104,7 @@ int main() {
     cout << it -> first << endl;
     vector<string> v = it -> second;
     for (int i=0; i < v.size(); i++) {
-      cout << v[i]<< " ";
+	cout << v[i]<< " ";
     }
     cout<<endl;
   }
