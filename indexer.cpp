@@ -6,12 +6,32 @@
 #include <iostream>
 #include <unistd.h>
 #include <string>
+#include <boost/serialization/string.hpp>
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/serialization.hpp>
+#include <boost/serialization/map.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
 
 using namespace std;
 
 map<string, vector<string> > inv_index;
 const char * extensions[] = {"txt", "doc"};
 vector<string> valid_extensions(extensions, end(extensions));
+
+map<string, vector<string> > deserialize(string fname) {
+    ifstream in(fname.c_str());
+    map<string, vector<string> > loaded_map;
+    boost::archive::text_iarchive iarch(in);
+    iarch >> loaded_map;
+    return loaded_map;
+}
+
+void serialize(map<string, vector<string> > map, string file_out) {
+   ofstream fout(file_out.c_str());
+   boost::archive::text_oarchive oarch(fout);
+   oarch << map;
+}
 
 bool is_valid_file(string name) {
     string ext = name.substr(name.find_last_of(".")+1);
@@ -99,13 +119,13 @@ void index_all_files(string base_path) {
 }
 
 int main() {
-  index_all_files(get_cwd());
-  for (std::map<string,vector<string> >::iterator it=inv_index.begin(); it!=inv_index.end(); ++it) {
-    cout << it -> first << endl;
-    vector<string> v = it -> second;
-    for (int i=0; i < v.size(); i++) {
-	cout << v[i]<< " ";
+    inv_index = deserialize("test");
+    for (std::map<string,vector<string> >::iterator it=inv_index.begin(); it!=inv_index.end(); ++it) {
+	cout << it -> first << endl;
+	vector<string> v = it -> second;
+	for (int i=0; i < v.size(); i++) {
+	    cout << v[i]<< " ";
+	}
+	cout<<endl;
     }
-    cout<<endl;
-  }
 }
