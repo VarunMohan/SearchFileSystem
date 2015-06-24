@@ -74,7 +74,7 @@ void list_directory_contents(string path, vector<string>& dirs, vector<string>& 
         if (entry->d_type == DT_DIR && is_valid_dir(entry->d_name)) {
             dirs.push_back(string(entry->d_name));
         } else if (entry->d_type == DT_REG && is_valid_file(entry->d_name)) {
-            files.push_back(string(entry->d_name));
+            files.push_back(path+"/"+string(entry->d_name));
         }
     }
 
@@ -94,7 +94,7 @@ void index_all_files(string base_path) {
     vector<string> all_files;
     get_all_files(base_path, all_files);
     for (int i = 0; i < all_files.size(); i++) {
-        index_file(base_path + "/" + all_files[i]);
+        index_file(all_files[i]);
     }
 }
 
