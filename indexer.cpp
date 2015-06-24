@@ -124,6 +124,12 @@ void test_serialization() {
     for (std::map<string,vector<string> >::iterator it=inv_index.begin(); it!=inv_index.end(); ++it) {
 	vector<string> v1 = it->second;
 	vector<string> v2 = deserialized[it->first];
+	for (int i = 0; i < v1.size(); i++) {
+	    if (v1[i] != v2[i]) {
+		perror("Bad serialization...");
+		exit(0);
+	    }
+	}
     }
 }
 
