@@ -128,7 +128,7 @@ void test_serialization() {
 }
 
 int main() {
-    inv_index = deserialize("test");
+    index_all_files(get_cwd());
     for (std::map<string,vector<string> >::iterator it=inv_index.begin(); it!=inv_index.end(); ++it) {
 	cout << it -> first << endl;
 	vector<string> v = it -> second;
