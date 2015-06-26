@@ -12,7 +12,7 @@ private:
     ifstream fileInput;
 
     void readStopWords() {
-	ifstream stopwordsFile("stopwords.txt");
+	ifstream stopwordsFile("lib/misc/stopwords.txt");
 	while (!stopwordsFile.eof()) {
 	    string cur;
 	    stopwordsFile >> cur;
@@ -52,7 +52,7 @@ public:
     //Takes a filename and initializes the IndexTokenizer
     IndexTokenizer(string fname) {
 	this->fileInput.open(fname);
-	//this->readStopWords();
+	this->readStopWords();
 	this->advanceToAlphanumChar();
     }
 
