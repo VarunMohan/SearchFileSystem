@@ -1,3 +1,3 @@
-run:
-	g++ lib/indexing/index.cpp
-	./a.out
+index:
+	g++ lib/indexing/index.cpp -o index
+	./index
