@@ -13,6 +13,10 @@ class PostingList {
     	return posting_list.size() == 0;
     }
  public:
+        PostingList() {
+	    term = "";
+	}
+
  	PostingList(string t) {
  		term = t;
  	}

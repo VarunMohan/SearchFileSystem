@@ -6,6 +6,9 @@
 
 using namespace std;
 
+const char * extensions[] = {"txt", "doc"};
+vector<string> valid_extensions(extensions, end(extensions));
+
 /***************************************
  * Data structures to deal with
  * dirs/files
@@ -24,7 +27,12 @@ bool beginsWith(string name, string shorter) {
 }
 
 bool hasValidExtension(string name) {
-    return true;
+    string ext = name.substr(name.find_last_of(".")+1);
+    for (int i = 0; i < valid_extensions.size(); i++) {
+        if (ext == valid_extensions[i]) return true;
+    }
+    return false;
+
 }
 
 //Returns whether the given file is valid for indexing
