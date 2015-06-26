@@ -9,6 +9,9 @@ using namespace std;
 const char * extensions[] = {"txt", "doc"};
 vector<string> valid_extensions(extensions, end(extensions));
 
+const char * badDirs[] = {"misc"};
+vector<string> bad_directories(badDirs, end(badDirs));
+
 /***************************************
  * Data structures to deal with
  * dirs/files
@@ -35,6 +38,13 @@ bool hasValidExtension(string name) {
 
 }
 
+bool isInvalidDirectory(string dname) {
+    for (int i = 0; i < bad_directories.size(); i++) {
+	if (bad_directories[i] == dname) return true;
+    }
+    return false;
+}
+
 //Returns whether the given file is valid for indexing
 bool shouldIndexFile(string fname) {
     return !beginsWith(fname, ".") && hasValidExtension(fname);
@@ -42,7 +52,7 @@ bool shouldIndexFile(string fname) {
 
 //Returns whether the given directory should be searched for indexing
 bool shouldIndexDirectory(string dname) {
-    return !beginsWith(dname, ".");
+    return !beginsWith(dname, ".") && !isInvalidDirectory(dname);
 }
 
 //Returns a vector of strings of all directories in a given directory. Non recursive helper function

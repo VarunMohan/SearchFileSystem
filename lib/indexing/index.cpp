@@ -38,4 +38,13 @@ void index_files() {
 
 int main(void) {
     index_files();
+    for (map<string, PostingList>::iterator it = inv_index.begin();
+	 it != inv_index.end(); it++) {
+	cout << it->first << endl;
+	vector<Posting> postingList = it->second.getList();
+	for (int i = 0; i < postingList.size(); i++) {
+	    Posting cur = postingList[i];
+	    cout << doc_id_to_path_map[cur.getDocID()] << endl;
+	}
+    }
 }
