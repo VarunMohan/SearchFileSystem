@@ -12,7 +12,6 @@ vector<string> doc_id_to_path_map;
 map<string, PostingList> inv_index;
 
 inline void index_term(string term, int docid, int position) {
-    cout << term << endl;
     if (inv_index.count(term) == 0) {
         PostingList plist(term);
         inv_index[term] = plist;
