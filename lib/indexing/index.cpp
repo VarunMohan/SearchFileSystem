@@ -21,7 +21,7 @@ void index_file(string fullpath, int docid) {
     IndexTokenizer tok(fullpath);
     while (!tok.isEmpty()) {
         SFS cur_token = tok.nextToken();
-        index_term(cur_token.tok, cur_token., cur_token.pos);
+        index_term(cur_token.tok, docid, cur_token.pos);
     }
 }
 
