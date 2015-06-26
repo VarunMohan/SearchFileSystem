@@ -15,10 +15,10 @@ private:
     }
 
     void advanceToAlphanumChar() {
-	char c;
-	while (!is_alphanum(this->fileInput.peek()))
-	    this->fileInput >> c;
-	//cout << "PEEK: " << (char)this->fileInput.peek() << endl;
+	while (!this->fileInput.eof() &&
+	       !is_alphanum(this->fileInput.peek())) {
+	    this->fileInput.get();
+	}
     }
 
 public:
