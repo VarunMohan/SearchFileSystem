@@ -21,7 +21,7 @@ class PostingList {
  		if (!isEmpty() && posting_list[posting_list.size() - 1].getDocID() == docid) {
  			posting_list[posting_list.size() - 1].add(position);
  		} else {
- 			posting_list.push_back(new Posting(position, docid));
+ 			posting_list.push_back(new Posting(docid, position));
  		}
 
  	}

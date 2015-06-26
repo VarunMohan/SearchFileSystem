@@ -8,7 +8,7 @@ class Posting {
     int docid;
     vector<int> positions;
  public:
-    Posting (int pos, int id) {
+    Posting (int id, int pos) {
         positions.push_back(pos);
         docid = id;
     }
