@@ -4,6 +4,7 @@
 #include "tokenizer/IndexTokenizer.cpp"
 #include "../utils/DirectoryFileUtils.h"
 #include "tokenizer/SFSToken.h"
+#include "../datastructures/PostingList.h"
 
 using namespace std;
 
@@ -12,7 +13,8 @@ map<string, PostingList> inv_index;
 
 inline void index_term(string term, int docid, int position) {
     if (inv_index.count(term) == 0) {
-        inv_index[term] = new PostingList(term);
+        PostingList plist(term);
+        inv_index[term] = plist;
     }
     inv_index[term].add(docid, position);
 }
@@ -20,7 +22,7 @@ inline void index_term(string term, int docid, int position) {
 void index_file(string fullpath, int docid) {
     IndexTokenizer tok(fullpath);
     while (!tok.isEmpty()) {
-        SFS cur_token = tok.nextToken();
+        SFSToken cur_token = tok.nextToken();
         index_term(cur_token.tok, docid, cur_token.pos);
     }
 }

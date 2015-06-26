@@ -17,8 +17,8 @@ class Posting {
         return positions;
     }
 
-    vector <int> add(int docid) {
-        positions.push_back(i);
+    void add(int docid) {
+        positions.push_back(docid);
     }
 
     int getDocID() {
