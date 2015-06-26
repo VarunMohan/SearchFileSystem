@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include "SFSToken.h"
 
 using namespace std;
 
@@ -28,15 +29,18 @@ public:
 	this->advanceToAlphanumChar();
     }
 
-    string nextToken() {
+    //Assumes that the first character is alphanum
+    SFSToken nextToken() {
 	string token = "";
+	int position = this->fileInput.tellg();
 	char c;
+
 	while (is_alphanum(this->fileInput.peek())) {
 	    this->fileInput >> c;
 	    token += c;
 	}
 	this->advanceToAlphanumChar();
-	return token;
+	return (SFSToken){token, position};
     }
 
     bool isEmpty() {
