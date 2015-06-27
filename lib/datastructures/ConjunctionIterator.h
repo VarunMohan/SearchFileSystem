@@ -12,33 +12,58 @@ class ConjunctionIterator : public DocIterator
     private:
     	vector<DocIterator> subIterators;
 
+        bool isMatch() {
+            int curDoc = subIterators[0].getDocID();
+            for (int i = 1; i < subIterators.size(); i++) {
+                if (subIterators[i].getDocID() != curDoc) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        int findNextMatch() {
+            int matchID = subIterators[0].getDocID();
+            bool totalMatch = false;
+            while (!totalMatch) {
+                int maxAdvance = matchID;
+                totalMatch = true;
+                for (int i = 1; i < subIterators.size(); i++) {
+                    if (subIterators[i].advance(matchID) != matchID){
+                        totalMatch = false;
+                        maxAdvance = (maxAdvance < subIterators[i].getDocID()) ? subIterators[i].getDocID() : maxAdvance;
+                    }
+                }
+                if (!totalMatch) {
+                    subIterators[0].advance(maxAdvance);
+                    matchID = subIterators[0].getDocID();
+                }
+            }
+            return matchID;
+        }
+
+
     public:
-    	TermIterator(vector<DocIterator> iterators) {
+    	ConjunctionIterator(vector<DocIterator> iterators) {
     		subIterators = iterators;
-            sort(subIterators.begin(), subIterators.end(), DocIterator.cmp);
+            sort(subIterators.begin(), subIterators.end(), DocIterator.compare());
     	}
 
     	int getDocID() {
-    		return list[pos].getDocID();
-    	}
-
-    	vector<int> getPositions() {
-    		return list[pos].getPositions();
+    		if (!isMatch()) {
+                return next();
+            }
+            return subIterators[0].getDocID();
     	}
 
     	int next() {
-    		if (pos < list.size()) {
-    			pos++;
-    			return list[pos].getDocID();
-    		}
-    		else return MAX_DOCID;
+    		subIterators[0].next();
+            findNextMatch();
     	}
 
     	int advance(int docid) {
-    		while (next() < docID) {
-    			//do nothing
-    		}
-    		return getDocID();
+    		subIterators[0].advance(docid);
+    		return findNextMatch();
     	}   
 
         int cost () {
