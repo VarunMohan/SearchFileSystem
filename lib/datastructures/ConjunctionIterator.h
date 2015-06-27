@@ -23,7 +23,10 @@ class ConjunctionIterator : public DocIterator
 
         int findNextMatch() {
             int matchID = subIterators[0].getDocID();
-            if (matchID == DocIterator::MAX_DOCID) return MAX_DOCID;
+            if (matchID == DocIterator::MAX_DOCID){
+                end = true;
+                return DocIterator::MAX_DOCID;
+            } 
             bool totalMatch = false;
             while (!totalMatch) {
                 int maxAdvance = matchID;
@@ -32,10 +35,12 @@ class ConjunctionIterator : public DocIterator
                     if (subIterators[i].advance(matchID) != matchID){
                         int advancedID = subIterators[i].getDocID();
                         if (advancedID == DocIterator::MAX_DOCID) {
-                            return MAX_DOCID;
+                            end = true;
+                            return DocIterator::MAX_DOCID;
                         }
                         totalMatch = false;
-                        maxAdvance = (maxAdvance < advancedID) ? advancedID : maxAdvance;
+                        maxAdvance = advanceID;
+                        break;
                     }
                 }
                 if (!totalMatch) {
@@ -49,12 +54,13 @@ class ConjunctionIterator : public DocIterator
 
     public:
     	ConjunctionIterator(vector<DocIterator> iterators) {
-	    subIterators = iterators;
-	    end = false;
+	       subIterators = iterators;
+	       end = false;
             sort(subIterators.begin(), subIterators.end(), DocIterator::compare);
     	}
 
     	int getDocID() {
+            if (end) return DocIterator.MAX_DOCID;
     		if (!isMatch()) {
                 return next();
             }
@@ -62,11 +68,13 @@ class ConjunctionIterator : public DocIterator
     	}
 
     	int next() {
+            if (end) return DocIterator.MAX_DOCID;
     		subIterators[0].next();
             return findNextMatch();
     	}
 
     	int advance(int docid) {
+            if (end) return DocIterator.MAX_DOCID;
     		subIterators[0].advance(docid);
     		return findNextMatch();
     	}

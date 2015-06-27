@@ -43,6 +43,8 @@ class TermIterator : public DocIterator
 
     	//MAKE ADVANCE FASTER
     	int advance(int docID) {
+    		if (end) return DocIterator::MAX_DOCID;
+    		
     		while (next() < docID) {
     			//do nothing
     		}
