@@ -1,6 +1,9 @@
 #include <iostream>
 #include <vector>
 #include "Posting.h"
+#include <boost/serialization/string.hpp>
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/serialization.hpp>
 
 using namespace std;
 
@@ -39,4 +42,9 @@ class PostingList {
  		return term;
  	}
 
+	template<class Archive>
+	void serialize(Archive &ar, const unsigned int version) {
+	    ar & posting_list;
+	    ar & term;
+	}
 };

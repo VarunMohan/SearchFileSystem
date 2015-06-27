@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/serialization.hpp>
 
 using namespace std;
 
@@ -8,6 +10,10 @@ class Posting {
     int docid;
     vector<int> positions;
  public:
+    Posting() {
+	docid = -1;
+    }
+
     Posting (int id, int pos) {
         positions.push_back(pos);
         docid = id;
@@ -23,5 +29,11 @@ class Posting {
 
     int getDocID() {
     	return docid;
+    }
+
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version) {
+	ar & positions;
+	ar & docid;
     }
 };
