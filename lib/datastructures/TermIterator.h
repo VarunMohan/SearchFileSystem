@@ -19,12 +19,15 @@ class TermIterator : public DocIterator
     	}
 
     	int getDocID() {
+    		if(end) {
+    			return DocIterator::MAX_DOCID;
+    		}
     		return list[pos].getDocID();
     	}
 
     	vector<int> getPositions() {
-    		if(end) {
-    			return DocIterator::MAX_DOCID;
+    		if (end) {
+    			vector <int> v; return v;
     		}
     		return list[pos].getPositions();
     	}
