@@ -75,8 +75,8 @@ class ConjunctionIterator : public DocIterator
 
     	int advance(int docid) {
             if (end) return DocIterator::MAX_DOCID;
-    		subIterators[0]->advance(docid);
-    		return findNextMatch();
+	    subIterators[0]->advance(docid);
+	    return findNextMatch();
     	}
 
         int cost () {

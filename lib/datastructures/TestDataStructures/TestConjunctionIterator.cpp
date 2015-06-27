@@ -24,8 +24,8 @@ int main() {
     t3.add(2,1);
     t3.add(4,1);
     t3.add(6,1);
-    t3.add(8,1);
     t3.add(7,1);
+    t3.add(8,1);
 
     TermIterator tt1(t1);
     TermIterator tt2(t2);
@@ -36,7 +36,25 @@ int main() {
     iterators.push_back(&tt2);
     iterators.push_back(&tt3);
 
+    //Test advance
+
     ConjunctionIterator citer(iterators);
     cout << citer.getDocID() << endl;
-    cout << citer.next() << endl;
+    citer.next();
+    cout << citer.getDocID() << endl;
+    citer.next();
+    cout << citer.getDocID() << endl;
+
+    TermIterator ttt1(t1);
+    TermIterator ttt2(t2);
+    TermIterator ttt3(t3);
+
+    vector<DocIterator *> iterators2;
+    iterators2.push_back(&ttt1);
+    iterators2.push_back(&ttt2);
+    iterators2.push_back(&ttt3);
+
+    ConjunctionIterator citer2(iterators2);
+    cout << citer2.advance(7) << endl;
+    cout << citer2.next() << endl;
 }
