@@ -10,6 +10,7 @@ class TermIterator : public DocIterator
     private:
     	vector<Posting> list;
     	int pos;
+    	bool end;
 
     public:
     	TermIterator(PostingList plist) {
@@ -22,6 +23,9 @@ class TermIterator : public DocIterator
     	}
 
     	vector<int> getPositions() {
+    		if(end) {
+    			return DocIterator::MAX_DOCID;
+    		}
     		return list[pos].getPositions();
     	}
 
@@ -30,9 +34,11 @@ class TermIterator : public DocIterator
     			pos++;
     			return list[pos].getDocID();
     		}
-    		return (DocIterator.MAX_DOCID);
+    		end = true;
+    		return (DocIterator::MAX_DOCID);
     	}
 
+    	//MAKE ADVANCE FASTER
     	int advance(int docID) {
     		while (next() < docID) {
     			//do nothing

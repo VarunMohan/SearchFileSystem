@@ -5,8 +5,6 @@
 
 using namespace std;
 
-const int MAX_DOCID = 2147483647;
-
 class ConjunctionIterator : public DocIterator
 {
     private:
@@ -24,7 +22,7 @@ class ConjunctionIterator : public DocIterator
 
         int findNextMatch() {
             int matchID = subIterators[0].getDocID();
-            if (matchID == MAX_DOCID) return MAX_DOCID;
+            if (matchID == DocIterator::MAX_DOCID) return MAX_DOCID;
             bool totalMatch = false;
             while (!totalMatch) {
                 int maxAdvance = matchID;
@@ -32,7 +30,7 @@ class ConjunctionIterator : public DocIterator
                 for (int i = 1; i < subIterators.size(); i++) {
                     if (subIterators[i].advance(matchID) != matchID){
                         int advancedID = subIterators[i].getDocID();
-                        if (advancedID == MAX_DOCID) {
+                        if (advancedID == DocIterator::MAX_DOCID) {
                             return MAX_DOCID;
                         }
                         totalMatch = false;
