@@ -6,5 +6,8 @@ class DocIterator {
     virtual int next() = 0;
     virtual int advance(int docid) = 0;
     virtual int cost() = 0;
-};
 
+    static int compare(DocIterator &a, DocIterator &b) {
+	return a.cost() < b.cost();
+    }
+};

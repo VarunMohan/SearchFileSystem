@@ -15,5 +15,9 @@ int main() {
 
 	TermIterator tIterator(p);
 
-	cout << tIterator.getDocID() << endl;
+	int did = tIterator.next();
+	while (did < 100) {
+	    cout << did << endl;
+	    did = tIterator.next();
+	}
 }

@@ -8,6 +8,7 @@ using namespace std;
 class ConjunctionIterator : public DocIterator
 {
     private:
+        bool end;
     	vector<DocIterator> subIterators;
 
         bool isMatch() {
@@ -48,9 +49,9 @@ class ConjunctionIterator : public DocIterator
 
     public:
     	ConjunctionIterator(vector<DocIterator> iterators) {
-    		subIterators = iterators;
-            end = false;
-            //sort(subIterators.begin(), subIterators.end(), DocIterator.compare());
+	    subIterators = iterators;
+	    end = false;
+            sort(subIterators.begin(), subIterators.end(), DocIterator::compare);
     	}
 
     	int getDocID() {
@@ -68,10 +69,10 @@ class ConjunctionIterator : public DocIterator
     	int advance(int docid) {
     		subIterators[0].advance(docid);
     		return findNextMatch();
-    	}   
+    	}
 
         int cost () {
             //no real value
             return subIterators[0].cost();
-        } 	
+        }
 };
