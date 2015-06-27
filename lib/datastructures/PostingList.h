@@ -1,3 +1,6 @@
+#ifndef POSTINGLIST
+#define POSTINGLIST
+
 #include <iostream>
 #include <vector>
 #include "Posting.h"
@@ -48,3 +51,5 @@ class PostingList {
 	    ar & term;
 	}
 };
+
+#endif

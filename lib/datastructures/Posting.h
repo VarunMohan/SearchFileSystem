@@ -1,3 +1,6 @@
+#ifndef POSTING
+#define POSTING
+
 #include <iostream>
 #include <vector>
 #include <boost/serialization/vector.hpp>
@@ -37,3 +40,5 @@ class Posting {
 	ar & docid;
     }
 };
+
+#endif

@@ -24,7 +24,7 @@ class ConjunctionIterator : public DocIterator
 
         int findNextMatch() {
             int matchID = subIterators[0].getDocID();
-            if (matchID = MAX_DOCID) return MAX_DOCID;
+            if (matchID == MAX_DOCID) return MAX_DOCID;
             bool totalMatch = false;
             while (!totalMatch) {
                 int maxAdvance = matchID;
@@ -36,7 +36,7 @@ class ConjunctionIterator : public DocIterator
                             return MAX_DOCID;
                         }
                         totalMatch = false;
-                        maxAdvance = (maxAdvance < subIterators[i].getDocID()) ? subIterators[i].getDocID() : maxAdvance;
+                        maxAdvance = (maxAdvance < advancedID) ? advancedID : maxAdvance;
                     }
                 }
                 if (!totalMatch) {
@@ -51,7 +51,7 @@ class ConjunctionIterator : public DocIterator
     public:
     	ConjunctionIterator(vector<DocIterator> iterators) {
     		subIterators = iterators;
-            sort(subIterators.begin(), subIterators.end(), DocIterator.compare());
+            //sort(subIterators.begin(), subIterators.end(), DocIterator.compare());
     	}
 
     	int getDocID() {
