@@ -1,21 +1,21 @@
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include "DocIterator.h"
-#include "PostingList.h"
 
 using namespace std;
 
 const int MAX_DOCID = 2147483647;
 
-class TermIterator : public DocIterator
+class ConjunctionIterator : public DocIterator
 {
     private:
-    	vector<Posting> list;
-    	int pos = 0;
+    	vector<DocIterator> subIterators;
 
     public:
-    	TermIterator(PostingList plist) {
-    		list = plist.getList();
+    	TermIterator(vector<DocIterator> iterators) {
+    		subIterators = iterators;
+            sort(subIterators.begin(), subIterators.end(), DocIterator.cmp);
     	}
 
     	int getDocID() {
@@ -39,9 +39,10 @@ class TermIterator : public DocIterator
     			//do nothing
     		}
     		return getDocID();
-    	}  
+    	}   
 
-    	int cost() {
-    		return list.size();
-    	}  	
+        int cost () {
+            //no real value
+            return subIterators[0].cost();
+        } 	
 };
