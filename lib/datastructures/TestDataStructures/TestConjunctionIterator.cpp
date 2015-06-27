@@ -38,4 +38,5 @@ int main() {
 
     ConjunctionIterator citer(iterators);
     cout << citer.getDocID() << endl;
+    cout << citer.next() << endl;
 }

@@ -33,7 +33,6 @@ class ConjunctionIterator : public DocIterator
                 totalMatch = true;
                 for (int i = 1; i < subIterators.size(); i++) {
                     int advancedID = subIterators[i] -> advance(matchID);
-                    cout << advancedID << endl;
                     if (advancedID != matchID){
                         if (advancedID == DocIterator::MAX_DOCID) {
                             end = true;
