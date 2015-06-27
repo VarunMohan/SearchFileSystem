@@ -51,6 +51,7 @@ class ConjunctionIterator : public DocIterator
     public:
     	ConjunctionIterator(vector<DocIterator> iterators) {
     		subIterators = iterators;
+            end = false;
             //sort(subIterators.begin(), subIterators.end(), DocIterator.compare());
     	}
 

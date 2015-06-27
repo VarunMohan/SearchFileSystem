@@ -5,17 +5,16 @@
 
 using namespace std;
 
-const int MAX_DOCID = 2147483647;
-
 class TermIterator : public DocIterator
 {
     private:
     	vector<Posting> list;
-    	int pos = 0;
+    	int pos;
 
     public:
     	TermIterator(PostingList plist) {
     		list = plist.getList();
+    		pos = 0;
     	}
 
     	int getDocID() {
@@ -27,14 +26,14 @@ class TermIterator : public DocIterator
     	}
 
     	int next() {
-    		if (pos < list.size()) {
+    		if (pos < list.size() - 1) {
     			pos++;
     			return list[pos].getDocID();
     		}
-    		else return MAX_DOCID;
+    		return (DocIterator.MAX_DOCID);
     	}
 
-    	int advance(int docid) {
+    	int advance(int docID) {
     		while (next() < docID) {
     			//do nothing
     		}
