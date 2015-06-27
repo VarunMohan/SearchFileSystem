@@ -15,13 +15,17 @@ class TermIterator : public DocIterator
     	}
 
     	int getDocID() {
-    		return list.get(pos).getDocID();
+    		return list[pos].getDocID();
+    	}
+
+    	vector<int> getPositions() {
+    		return list[pos].getPositions();
     	}
 
     	int next() {
     		if (pos < list.size()) {
     			pos++;
-    			return list.get(pos).getDocID();
+    			return list[pos].getDocID();
     		}
     		else return MAX_DOCID;
     	}
