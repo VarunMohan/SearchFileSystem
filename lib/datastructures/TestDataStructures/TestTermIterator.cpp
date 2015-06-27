@@ -13,11 +13,21 @@ int main() {
 	p.add(5,10);
 	p.add(7,8);
 
-	TermIterator tIterator(p);
+	TermIterator tIterator1(p);
+	TermIterator tIterator2(p);
 
-	int did = tIterator.next();
+	int did = tIterator1.getDocID();
 	while (did < 100) {
 	    cout << did << endl;
-	    did = tIterator.next();
+	    did = tIterator1.next();
 	}
+
+	cout << endl;
+	did = tIterator2.advance(2);
+	cout << did << endl;
+	did = tIterator2.advance(4);
+	cout << did << endl;
+	did = tIterator2.advance(6);
+	cout << did << endl;
+
 }

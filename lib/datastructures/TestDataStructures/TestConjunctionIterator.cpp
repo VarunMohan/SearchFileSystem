@@ -37,5 +37,5 @@ int main() {
     iterators.push_back(&tt3);
 
     ConjunctionIterator citer(iterators);
-    cout << citer.getDocID();
+    cout << citer.getDocID() << endl;
 }

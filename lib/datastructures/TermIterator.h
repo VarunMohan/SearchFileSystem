@@ -44,7 +44,7 @@ class TermIterator : public DocIterator
     	//MAKE ADVANCE FASTER
     	int advance(int docID) {
     		if (end) return DocIterator::MAX_DOCID;
-
+            if (list[pos].getDocID() >= docID)  return docID;
     		while (next() < docID) {
     			//do nothing
     		}
