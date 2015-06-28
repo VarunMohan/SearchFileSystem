@@ -27,17 +27,21 @@ class ConjunctionIterator : public DocIterator
 
             for (int i = 0; i < positions[0].size(); i++) {
                 int curID = positions[0][i];
+                bool phrase = true;
                 for (int j = 1; j < subIterators.size(); j++) {
                     while (positions[j][start[j]] < curID + offsets[j-1]) {
                         start[j]++;
                         if (start[j] == positions[j].size()) return false;
                     }
-                    if (positions[j][start[j]] != curID + offsets[j-1]) continue;
+                    if (positions[j][start[j]] != curID + offsets[j-1]) {
+                        phrase = false;
+                        break;
+                    }
                     curID += offsets[j-1];
                 }
+                if (phrase) return true;
             }
-
-            return true;
+            return false;
         }
 
         int findNextMatch() {
