@@ -1,3 +1,6 @@
+#ifndef TERMITERATOR
+#define TERMITERATOR
+
 #include <vector>
 #include <iostream>
 #include "DocIterator.h"
@@ -67,3 +70,5 @@ class TermIterator : public DocIterator
     	}
 
 };
+
+#endif

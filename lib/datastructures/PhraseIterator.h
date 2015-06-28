@@ -1,14 +1,15 @@
 #include <vector>
 #include <iostream>
+#include "TermIterator.h"
 #include "DocIterator.h"
 
 using namespace std;
 
-class ConjunctionIterator : public DocIterator
+class PhraseIterator : public DocIterator
 {
     private:
         bool end;
-    	vector<DocIterator *> subIterators;
+    	vector<TermIterator *> subIterators;
         vector<int> offsets;
 
         bool isPhrase() {
@@ -26,18 +27,18 @@ class ConjunctionIterator : public DocIterator
             }
 
             for (int i = 0; i < positions[0].size(); i++) {
-                int curID = positions[0][i];
+                int curPos = positions[0][i];
                 bool phrase = true;
                 for (int j = 1; j < subIterators.size(); j++) {
-                    while (positions[j][start[j]] < curID + offsets[j-1]) {
+                    while (positions[j][start[j]] < curPos + offsets[j-1]) {
                         start[j]++;
                         if (start[j] == positions[j].size()) return false;
                     }
-                    if (positions[j][start[j]] != curID + offsets[j-1]) {
+                    if (positions[j][start[j]] != curPos + offsets[j-1]) {
                         phrase = false;
                         break;
                     }
-                    curID += offsets[j-1];
+                    curPos += offsets[j-1];
                 }
                 if (phrase) return true;
             }
@@ -73,7 +74,7 @@ class ConjunctionIterator : public DocIterator
             }
             if (!isPhrase()) {
                 subIterators[0]->next();
-                findNextMatch();
+                return findNextMatch();
             }
             return matchID;
         }
@@ -84,14 +85,11 @@ class ConjunctionIterator : public DocIterator
 	       subIterators = iterators;
            offsets = offs;
 	       end = false;
-	       sort(subIterators.begin(), subIterators.end(), DocIterator::compare);
+           findNextMatch();
     	}
 
     	int getDocID() {
             if (end) return DocIterator::MAX_DOCID;
-    		if (!isMatch()) {
-                return next();
-            }
             return subIterators[0]->getDocID();
     	}
 
