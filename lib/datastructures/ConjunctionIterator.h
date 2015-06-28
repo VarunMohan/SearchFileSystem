@@ -1,6 +1,5 @@
 #include <vector>
 #include <iostream>
-//#include <algorithm>
 #include "DocIterator.h"
 
 using namespace std;
