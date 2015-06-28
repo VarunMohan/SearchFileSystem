@@ -8,7 +8,8 @@
 #include "TokenTypes.h"
 #include "parselets/PrefixParselet.h"
 #include "parselets/InfixParselet.h"
-#include "parselets/TermPhraseParselet.h"
+#include "parselets/PhraseParselet.h"
+#include "parselets/TermParselet.h"
 #include "expressions/Expression.h"
 
 using namespace std;

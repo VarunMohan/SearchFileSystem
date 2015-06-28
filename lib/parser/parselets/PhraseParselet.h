@@ -1,9 +1,9 @@
-#ifndef TERMPHRASEPARSELET
-#define TERMPHRASEPARSELET
+#ifndef PHRASEPARSELET
+#define PHRASEPARSELET
 
 #include <iostream>
 #include "../expressions/Expression.h"
-#include "../expressions/TermPhraseExpression.h"
+#include "../expressions/PhraseExpression.h"
 #include "PrefixParselet.h"
 #include "../Token.h"
 #include "../Parser.h"
@@ -12,14 +12,14 @@ using namespace std;
 
 class Parser;
 
-class TermPhraseParselet : public PrefixParselet {
+class PhraseParselet : public PrefixParselet {
  public:
-    TermPhraseParselet() {
+    PhraseParselet() {
 
     }
 
     Expression * parse(Parser *p, Token t) {
-	return new TermPhraseExpression(t);
+	return new PhraseExpression(t);
     }
 };
 

@@ -22,7 +22,7 @@ class Tokenizer {
 	tokens.push_back(Token(AND_TOKEN, "AND"));
 	tokens.push_back(Token(PHRASE_TOKEN, "\"Hello world\""));
 	tokens.push_back(Token(OR_TOKEN));
-	tokens.push_back(Token(PHRASE_TOKEN, "\"blah2\""));
+	tokens.push_back(Token(TERM_TOKEN, "\"blah2\""));
 	index = 0;
     }
 

@@ -1,5 +1,5 @@
-#ifndef TERMPHRASEEXPRESSION
-#define TERMPHRASEEXPRESSION
+#ifndef PHRASEEXPRESSION
+#define PHRASEEXPRESSION
 
 #include <iostream>
 #include "../Token.h"
@@ -7,16 +7,16 @@
 
 using namespace std;
 
-class TermPhraseExpression : public Expression {
+class PhraseExpression : public Expression {
  private:
     Token tok;
  public:
-    TermPhraseExpression(Token t) {
+    PhraseExpression(Token t) {
 	tok = t;
     }
 
     string toString() {
-	return tok.value;
+	return "Phrase("+tok.value+")";
     }
 
     void free() {
