@@ -30,6 +30,12 @@ class Parser {
 	return t;
     }
 
+    int getPrecedence() {
+	if (infixParseletMap.find(peak()) == infixParseletMap.end()) return 0;
+	InfixParselet *p = infixParseletMap[peak()];
+	return p->getPrecedence();
+    }
+
  public:
     Parser() {
 	tokenizer = Tokenizer();
@@ -45,10 +51,10 @@ class Parser {
 
     Expression * parseRawString(string query) {
 	tokenizer = Tokenizer(query);
-	return parse();
+	return parse(0);
     }
 
-    Expression * parse() {
+    Expression * parse(int prec) {
 	Token curToken = consume();
 	if (prefixParseletMap.find(curToken) == prefixParseletMap.end()) {
 	    cout << "Error: Unexpected token " << curToken << endl;
@@ -57,11 +63,10 @@ class Parser {
 	PrefixParselet *prefixParselet = prefixParseletMap[curToken];
 	Expression *e = prefixParselet->parse(this, curToken);
 
-	Token nextToken = peak();
-	if (infixParseletMap.find(nextToken) != infixParseletMap.end()) {
-	    consume();
-	    InfixParselet *infixParselet = infixParseletMap[nextToken];
-	    return infixParselet->parse(this, e, nextToken);
+	while (prec < getPrecedence()) {
+	    Token t = consume();
+	    InfixParselet *p = infixParseletMap[t];
+	    e = p->parse(this, e, t);
 	}
 
 	return e;

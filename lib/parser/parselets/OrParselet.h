@@ -14,12 +14,16 @@ class Parser;
 
 class OrParselet : public InfixParselet {
  public:
+    OrParselet(int prec) : InfixParselet(prec) {
+
+    }
+
     OrParselet() {
 
     }
 
     Expression * parse(Parser *p, Expression *left, Token t) {
-	Expression *rest = p->parse();
+	Expression *rest = p->parse(precedence-1);
 	return new OrExpression(left, rest);
     }
 };

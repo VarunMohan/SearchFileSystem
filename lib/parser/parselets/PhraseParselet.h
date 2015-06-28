@@ -14,6 +14,10 @@ class Parser;
 
 class PhraseParselet : public PrefixParselet {
  public:
+    PhraseParselet(int prec) : PrefixParselet(prec) {
+
+    }
+
     PhraseParselet() {
 
     }

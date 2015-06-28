@@ -13,10 +13,10 @@
 using namespace std;
 
 int main(void) {
-    PhraseParselet phraseParselet = PhraseParselet();
-    TermParselet termParselet = TermParselet();
-    AndParselet andParselet = AndParselet();
-    OrParselet orParselet = OrParselet();
+    PhraseParselet phraseParselet = PhraseParselet(10);
+    TermParselet termParselet = TermParselet(10);
+    AndParselet andParselet = AndParselet(2);
+    OrParselet orParselet = OrParselet(1);
     Parser p;
     p.registerPrefixParselet(Token(PHRASE_TOKEN), &phraseParselet);
     p.registerPrefixParselet(Token(TERM_TOKEN), &termParselet);

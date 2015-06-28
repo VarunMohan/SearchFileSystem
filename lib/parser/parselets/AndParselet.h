@@ -14,12 +14,16 @@ class Parser;
 
 class AndParselet : public InfixParselet {
  public:
+    AndParselet(int prec) : InfixParselet(prec) {
+
+    }
+
     AndParselet() {
 
     }
 
     Expression * parse(Parser *p, Expression *left, Token t) {
-	Expression *rest = p->parse();
+	Expression *rest = p->parse(precedence-1);
 	return new AndExpression(left, rest);
     }
 };

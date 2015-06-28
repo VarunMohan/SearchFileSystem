@@ -14,6 +14,10 @@ class Parser;
 
 class TermParselet : public PrefixParselet {
  public:
+    TermParselet(int prec) : PrefixParselet(prec) {
+
+    }
+
     TermParselet() {
 
     }
