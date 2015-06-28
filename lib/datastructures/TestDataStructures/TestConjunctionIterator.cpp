@@ -36,9 +36,8 @@ int main() {
     iterators.push_back(&tt2);
     iterators.push_back(&tt3);
 
-    //Test advance
-
     ConjunctionIterator citer(iterators);
+    //Expect 2, 7, 2147483647
     cout << citer.getDocID() << endl;
     citer.next();
     cout << citer.getDocID() << endl;
@@ -55,6 +54,7 @@ int main() {
     iterators2.push_back(&ttt3);
 
     ConjunctionIterator citer2(iterators2);
+    //Expect 7, 2147483647
     cout << citer2.advance(7) << endl;
     cout << citer2.next() << endl;
 }
