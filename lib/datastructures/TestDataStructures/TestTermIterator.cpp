@@ -15,6 +15,7 @@ int main() {
 
 	TermIterator tIterator1(p);
 	TermIterator tIterator2(p);
+	TermIterator tIterator3(p);
 
 	int did = tIterator1.getDocID();
 	while (did < 100) {
@@ -29,5 +30,14 @@ int main() {
 	cout << did << endl;
 	did = tIterator2.advance(6);
 	cout << did << endl;
+	did = tIterator2.advance(6);
+	cout << did << endl;
+	did = tIterator2.advance(9);
+	cout << did << endl;
 
+	cout << endl;
+	did = tIterator3.advance(6);
+	cout << did << endl;
+	did = tIterator3.advance(5);
+	cout << did << endl;
 }

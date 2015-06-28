@@ -34,6 +34,10 @@ class Posting {
     	return docid;
     }
 
+    bool operator< (const Posting &other) const {
+	return docid < other.docid;
+    }
+
     template<class Archive>
     void serialize(Archive &ar, const unsigned int version) {
 	ar & positions;

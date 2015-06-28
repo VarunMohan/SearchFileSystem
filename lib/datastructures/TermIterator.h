@@ -43,12 +43,22 @@ class TermIterator : public DocIterator
 
     	//MAKE ADVANCE FASTER
     	int advance(int docID) {
-    		if (end) return DocIterator::MAX_DOCID;
-            if (list[pos].getDocID() >= docID)  return docID;
-    		while (next() < docID) {
-    			//do nothing
-    		}
-    		return getDocID();
+	    if (end) return DocIterator::MAX_DOCID;
+            if (getDocID() >= docID)  return getDocID();
+
+	    //Binary search a posting with specified docid
+	    Posting toFind = Posting(docID, 0);
+	    vector<Posting>::iterator it = lower_bound(list.begin(), list.end(), toFind);
+
+	    //Get position of found element. If less than current
+	    //position, return end token
+	    int newpos = it - list.begin();
+	    if (newpos >= list.size()) {
+		end = true;
+		return DocIterator::MAX_DOCID;
+	    }
+	    pos = newpos;
+	    return getDocID();
     	}
 
     	int cost() {
