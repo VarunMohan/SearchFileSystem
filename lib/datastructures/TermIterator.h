@@ -65,8 +65,4 @@ class TermIterator : public DocIterator
     		return list.size();
     	}
 
-	DocIterator& operator=(const DocIterator& other) {
-	    return *this;
-	}
-
 };
