@@ -71,7 +71,10 @@ class ConjunctionIterator : public DocIterator
                     matchID = subIterators[0]->getDocID();
                 }
             }
-            if (!isPhrase()) findNextMatch();
+            if (!isPhrase()) {
+                subIterators[0]->next();
+                findNextMatch();
+            }
             return matchID;
         }
 
