@@ -36,7 +36,7 @@ class DisjunctionIterator : public DocIterator
 
     	int getDocID() {
             if (end) return DocIterator::MAX_DOCID;
-            return subIterators[head].getDocID();
+            return subIterators[head]->getDocID();
     	}
 
     	int next() {
