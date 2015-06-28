@@ -56,13 +56,11 @@ class ConjunctionIterator : public DocIterator
 	    subIterators = iterators;
 	    end = false;
 	    sort(subIterators.begin(), subIterators.end(), DocIterator::compare);
+        findNextMatch();
     	}
 
     	int getDocID() {
             if (end) return DocIterator::MAX_DOCID;
-    		if (!isMatch()) {
-                return next();
-            }
             return subIterators[0]->getDocID();
     	}
 
