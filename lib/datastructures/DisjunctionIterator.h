@@ -29,9 +29,9 @@ class DisjunctionIterator : public DocIterator
 
     public:
     	DisjunctionIterator(vector<DocIterator *> iterators) {
-	       subIterators = iterators;
-	       end = false;
-           head = getLead();
+	    subIterators = iterators;
+	    end = false;
+	    head = getLead();
     	}
 
     	int getDocID() {

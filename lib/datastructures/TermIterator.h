@@ -16,6 +16,7 @@ class TermIterator : public DocIterator
     	TermIterator(PostingList plist) {
     		list = plist.getList();
     		pos = 0;
+		end = false;
     	}
 
     	int getDocID() {
@@ -59,7 +60,7 @@ class TermIterator : public DocIterator
 	    }
 	    pos = newpos;
 	    return getDocID();
-    	}
+	}
 
     	int cost() {
     		return list.size();
