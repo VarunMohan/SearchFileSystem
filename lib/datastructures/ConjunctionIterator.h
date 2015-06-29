@@ -1,3 +1,6 @@
+#ifndef CONJUNCTION_ITERATOR
+#define CONJUNCTION_ITERATOR
+
 #include <vector>
 #include <iostream>
 #include "DocIterator.h"
@@ -81,3 +84,6 @@ class ConjunctionIterator : public DocIterator
             return subIterators[0]->cost();
         }
 };
+
+
+#endif
