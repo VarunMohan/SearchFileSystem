@@ -22,7 +22,7 @@ int main(void) {
     p.registerPrefixParselet(Token(TERM_TOKEN), &termParselet);
     p.registerInfixParselet(Token(AND_TOKEN), &andParselet);
     p.registerInfixParselet(Token(OR_TOKEN), &orParselet);
-    Expression *e = p.parseRawString("filler");
+    Expression *e = p.parseRawString("  \"HELLO WORLD\" AND    \"TESTING\" OR  \"blah\"  AND \"blah2\"");
     cout << e->toString() << endl;
     e->free();
 }
