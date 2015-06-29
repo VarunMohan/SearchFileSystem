@@ -1,24 +1,19 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <unordered_set>
+#include <set>
 #include "SFSToken.h"
+#include "../misc/stopwords.cpp"
 
 using namespace std;
 
 class IndexTokenizer {
 private:
-    unordered_set<string> stopwords;
+    set<string> stopwordset;
     ifstream fileInput;
 
     void readStopWords() {
-	ifstream stopwordsFile("lib/misc/stopwords.txt");
-	while (!stopwordsFile.eof()) {
-	    string cur;
-	    stopwordsFile >> cur;
-	    this->stopwords.insert(cur);
-	}
-	stopwordsFile.close();
+	stopwordset = getStopwords();
     }
 
     //Assumes the current file is at an alphanum char
@@ -59,7 +54,7 @@ public:
     //Assumes that the first character is alphanum
     SFSToken nextToken() {
 	SFSToken curToken = this->nextTokenHelper();
-	while (stopwords.find(curToken.tok) != stopwords.end())
+	while (stopwordset.find(curToken.tok) != stopwordset.end())
 	    curToken = this->nextTokenHelper();
 	return curToken;
     }

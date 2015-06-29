@@ -17,7 +17,7 @@
 #include "../../datastructures/TermIterator.h"
 #include "../../datastructures/PhraseIterator.h"
 #include "../../datastructures/EmptyIterator.h"
-#include "../../misc/stopwords.h"
+#include "../../misc/stopwords.cpp"
 
 using namespace std;
 
