@@ -22,7 +22,8 @@ int main(void) {
     p.registerPrefixParselet(Token(TERM_TOKEN), &termParselet);
     p.registerInfixParselet(Token(AND_TOKEN), &andParselet);
     p.registerInfixParselet(Token(OR_TOKEN), &orParselet);
-    Expression *e = p.parseRawString("  \"HELLO WORLD\" AND    \"TESTING\" OR  \"blah\"  AND \"blah2\"");
+    //Expression *e = p.parseRawString("  \"HELLO WORLD\" AND    \"TESTING\" OR  \"blah\"  AND \"blah2\"");
+    Expression *e = p.parseRawString("\"A\" OR \"B\" OR \"C\" OR \"D\"");
     cout << e->toString() << endl;
     e->free();
 }

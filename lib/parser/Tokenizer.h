@@ -44,6 +44,7 @@ class Tokenizer {
 	    if (str[index] == ' ') isPhrase = true;
 	    termPhrase += str[index++];
 	}
+
 	if (isPhrase) curToken = Token(PHRASE_TOKEN, termPhrase);
 	else curToken = Token(TERM_TOKEN, termPhrase);
 	return index+1;
@@ -62,7 +63,7 @@ class Tokenizer {
     string getChunk(int index) {
 	if (str[index] == ' ') return " ";
 	string res;
-	while (str[index] != ' ') res += str[index++];
+	while (str[index] != ' ' && index < str.size()) res += str[index++];
 	return res;
     }
 
@@ -106,6 +107,7 @@ class Tokenizer {
     Tokenizer(string rawString) {
 	index = 0;
 	str = rawString;
+	cout << str << endl;
 	tokenize();
     }
 
