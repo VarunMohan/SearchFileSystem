@@ -107,7 +107,6 @@ class Tokenizer {
     Tokenizer(string rawString) {
 	index = 0;
 	str = rawString;
-	cout << str << endl;
 	tokenize();
     }
 
