@@ -14,10 +14,12 @@ class TermIterator : public DocIterator
     	vector<Posting> list;
     	int pos;
     	bool end;
+        string term;
 
     public:
     	TermIterator(PostingList plist) {
     		list = plist.getList();
+            term = plist.getTerm();
     		pos = 0;
 		end = false;
     	}
@@ -64,6 +66,10 @@ class TermIterator : public DocIterator
 	    pos = newpos;
 	    return getDocID();
 	}
+
+        string getTerm() {
+            return term;
+        }
 
     	int cost() {
     		return list.size();

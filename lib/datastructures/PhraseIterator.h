@@ -29,7 +29,7 @@ class PhraseIterator : public DocIterator
             for (int i = 0; i < positions[0].size(); i++) {
                 int curPos = positions[0][i];
                 bool phrase = true;
-                for (int j = 1; j < subIterators.size(); j++) {
+                for (int j = 1; j < positions.size(); j++) {
                     while (positions[j][start[j]] < curPos + offsets[j-1]) {
                         start[j]++;
                         if (start[j] == positions[j].size()) return false;
