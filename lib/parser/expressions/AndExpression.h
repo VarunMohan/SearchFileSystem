@@ -2,12 +2,14 @@
 #define ANDEXPRESSION
 
 #include <iostream>
+#include <vector>
+#include <map>
 #include "../Token.h"
 #include "Expression.h"
 #include "../../datastructures/DocIterator.h"
 #include "../../datastructures/PostingList.h"
 #include "../../datastructures/ConjunctionIterator.h"
-#include <vector>
+
 
 using namespace std;
 

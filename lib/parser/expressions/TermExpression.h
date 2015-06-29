@@ -2,6 +2,7 @@
 #define TERMEXPRESSION
 
 #include <iostream>
+#include <map>
 #include "../Token.h"
 #include "Expression.h"
 #include "../../datastructures/DocIterator.h"
