@@ -30,10 +30,18 @@ class PhraseExpression : public Expression {
     void splitPhrase() {
         string phrase = tok.value;
         istringstream iss(phrase);
-        copy(istream_iterator<string>(iss), istream_iterator<string>(), back_inserter(terms));
-        for (int i = 0; i < terms.size(); i++) {
-            std::transform(terms[i].begin(), terms[i].end(), terms[i].begin(), ::tolower);
-            if (i >= 1) offsets.push_back(1);
+        vector<string> tokens;
+        copy(istream_iterator<string>(iss), istream_iterator<string>(), back_inserter(tokens));
+        int cur = 0;
+        for (int i = 0; i < tokens.size(); i++) {
+            std::transform(tokens[i].begin(), tokens[i].end(), tokens[i].begin(), ::tolower);
+            if (!stopWords.count(tokens[i])) {
+                terms.push_back(tokens[i]);
+                if (terms.size() >= 1) offsets.push_back(cur);
+                cur = 1;
+            } else {
+                cur++;
+            }
         }
     }
 
@@ -52,6 +60,11 @@ class PhraseExpression : public Expression {
 
     virtual DocIterator* getIterator(map<string, PostingList>& index) {
         splitPhrase();
+        if (terms.size() == 0) return new EmptyIterator();
+        if (terms.size() == 1) {
+            if (index.count(terms[0])==0) return new EmptyIterator();
+            return new TermIterator(index[terms[0]]);
+        } 
         vector<TermIterator*> termIterators;
         for (int i = 0; i < terms.size(); i++) {
             if (index.count(terms[i]) == 0) return new EmptyIterator();
