@@ -15,27 +15,42 @@ using namespace std;
 
 class AndExpression : public Expression {
  private:
-    Expression *left, *right;
+    vector<Expression *> expressions;
  public:
-    AndExpression(Expression *left, Expression *right) {
-	this->left = left;
-	this->right = right;
+    AndExpression(Token andToken, Expression *left, Expression *right) {
+	expressions.push_back(left);
+	if (right->tok == andToken) {
+	    expressions.insert(expressions.end(),
+			       ((AndExpression *)right)->expressions.begin(),
+			       ((AndExpression *)right)->expressions.end());
+	    delete (AndExpression *)right;
+	}
+	else {
+	    expressions.push_back(right);
+	}
+	this->tok = andToken;
     }
 
     string toString() {
-	return "(AND, " + left->toString() + ", " + right->toString() + ")";
+	string res = "(AND";
+	for (int i = 0; i < expressions.size(); i++) {
+	    res += ", " + expressions[i]->toString();
+	}
+	res += ")";
+	return res;
     }
 
     void free() {
-	left->free();
-	right->free();
+	for (int i = 0; i < expressions.size(); i++)
+	    expressions[i]->free();
 	delete this;
     }
 
     virtual DocIterator* getIterator(map<string, PostingList>& index) {
         vector<DocIterator*> iterators;
-        iterators.push_back(left->getIterator(index));
-        iterators.push_back(right->getIterator(index));
+	for (int i = 0; i < expressions.size(); i++) {
+	    iterators.push_back(expressions[i]->getIterator(index));
+	}
         return new ConjunctionIterator(iterators);
     }
 };

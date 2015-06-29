@@ -13,8 +13,6 @@
 using namespace std;
 
 class TermExpression : public Expression {
- private:
-    Token tok;
  public:
     TermExpression(Token t) {
 	tok = t;

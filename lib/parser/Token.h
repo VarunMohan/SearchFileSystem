@@ -13,10 +13,12 @@ class Token {
 
     Token() {
 	this->token = "";
+	this->value = "";
     }
 
     Token(string token) {
 	this->token = token;
+	this->value = token;
     }
 
     Token(string token, string value) {
@@ -26,6 +28,10 @@ class Token {
 
     bool operator<(const Token &other) const {
 	return other.token < token;
+    }
+
+    bool operator==(const Token &other) const {
+	return other.value == value;
     }
 };
 

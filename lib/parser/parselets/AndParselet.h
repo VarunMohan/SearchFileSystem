@@ -6,6 +6,7 @@
 #include "../expressions/AndExpression.h"
 #include "PrefixParselet.h"
 #include "../Token.h"
+#include "../TokenTypes.h"
 #include "../Parser.h"
 
 using namespace std;
@@ -24,7 +25,7 @@ class AndParselet : public InfixParselet {
 
     Expression * parse(Parser *p, Expression *left, Token t) {
 	Expression *rest = p->parse(precedence-1);
-	return new AndExpression(left, rest);
+	return new AndExpression(t, left, rest);
     }
 };
 
