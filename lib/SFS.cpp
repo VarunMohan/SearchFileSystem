@@ -12,6 +12,7 @@ void index() {
     cout << "SERIALIZING DOCUMENT MAPPING" << endl;
     serialize_doc_id_map("serialized_doc_id_map");
     cout << "INDEXING COMPLETE" << endl;
+    print_index();
 }
 
 void search(int argc, char *argv[]) {
@@ -22,7 +23,11 @@ void search(int argc, char *argv[]) {
     Parser *p = getParser();
     Expression *e = p->parseRawString(query);
     DocIterator *it = e->getIterator(index);
-
+    int curDocId;
+    while ((curDocId = it->getDocID()) != DocIterator::MAX_DOCID) {
+	cout << curDocId << endl;
+	it->next();
+    }
     e->free();
     delete p;
 }
