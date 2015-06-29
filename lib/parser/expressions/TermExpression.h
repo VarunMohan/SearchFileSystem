@@ -7,6 +7,7 @@
 #include "../../datastructures/DocIterator.h"
 #include "../../datastructures/PostingList.h"
 #include "../../datastructures/TermIterator.h"
+#include "../../datastructures/EmptyIterator.h"
 
 using namespace std;
 
@@ -27,6 +28,9 @@ class TermExpression : public Expression {
     }
 
     virtual DocIterator* getIterator(map<string, PostingList>& index) {
+        if (index.count(tok.value) == 0) {
+            return new EmptyIterator();
+        }
         return new TermIterator(index[tok.value]);
     }
 

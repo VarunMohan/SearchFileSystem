@@ -1,3 +1,6 @@
+#ifndef DISJUNCTION_ITERATOR
+#define DISJUNCTION_ITERATOR
+
 #include <vector>
 #include <iostream>
 #include "DocIterator.h"
@@ -70,3 +73,5 @@ class DisjunctionIterator : public DocIterator
             return cost;
         }
 };
+
+#endif
