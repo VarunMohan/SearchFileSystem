@@ -12,18 +12,16 @@
 
 using namespace std;
 
-int main(void) {
-    PhraseParselet phraseParselet = PhraseParselet(10);
-    TermParselet termParselet = TermParselet(10);
-    AndParselet andParselet = AndParselet(2);
-    OrParselet orParselet = OrParselet(1);
-    Parser p;
-    p.registerPrefixParselet(Token(PHRASE_TOKEN), &phraseParselet);
-    p.registerPrefixParselet(Token(TERM_TOKEN), &termParselet);
-    p.registerInfixParselet(Token(AND_TOKEN), &andParselet);
-    p.registerInfixParselet(Token(OR_TOKEN), &orParselet);
-    //Expression *e = p.parseRawString("  \"HELLO WORLD\" AND    \"TESTING\" OR  \"blah\"  AND \"blah2\"");
-    Expression *e = p.parseRawString("\"A\" AND \"B\" AND \"C\" OR \"C\" AND \"D\" AND \"F\"");
-    cout << e->toString() << endl;
-    e->free();
+PhraseParselet phraseParselet = PhraseParselet(10);
+TermParselet termParselet = TermParselet(10);
+AndParselet andParselet = AndParselet(2);
+OrParselet orParselet = OrParselet(1);
+
+Parser *getParser() {
+    Parser *p = new Parser();
+    p->registerPrefixParselet(Token(PHRASE_TOKEN), &phraseParselet);
+    p->registerPrefixParselet(Token(TERM_TOKEN), &termParselet);
+    p->registerInfixParselet(Token(AND_TOKEN), &andParselet);
+    p->registerInfixParselet(Token(OR_TOKEN), &orParselet);
+    return p;
 }

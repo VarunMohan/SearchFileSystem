@@ -82,17 +82,3 @@ map<string, PostingList> deserialize_index(string fname) {
     iarch >> index;
     return index;
 }
-
-
-int main(void) {
-    index_files();
-    cout << endl;
-    cout << "SERIALIZING INDEX" << endl;
-    serialize_index("serialized_inv_index");
-    cout << "SERIALIZING DOCUMENT MAPPING" << endl;
-    serialize_doc_id_map("serialized_doc_id_map");
-    cout << "INDEXING COMPLETE" << endl;
-    //inv_index = deserialize_index("serialized_inv_index");
-    //doc_id_to_path_map = deserialize_doc_id_map("serialized_doc_id_map");
-    //print_index();
-}
