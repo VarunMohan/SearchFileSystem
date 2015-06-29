@@ -17,6 +17,7 @@
 #include "../../datastructures/TermIterator.h"
 #include "../../datastructures/PhraseIterator.h"
 #include "../../datastructures/EmptyIterator.h"
+#include "../../misc/stopwords.h"
 
 using namespace std;
 
@@ -64,7 +65,7 @@ class PhraseExpression : public Expression {
         if (terms.size() == 1) {
             if (index.count(terms[0])==0) return new EmptyIterator();
             return new TermIterator(index[terms[0]]);
-        } 
+        }
         vector<TermIterator*> termIterators;
         for (int i = 0; i < terms.size(); i++) {
             if (index.count(terms[i]) == 0) return new EmptyIterator();
