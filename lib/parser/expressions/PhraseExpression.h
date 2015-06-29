@@ -26,12 +26,12 @@ class PhraseExpression : public Expression {
     Token tok;
     vector<string> terms;
     vector<int> offsets;
-    set<string> stopWords;
 
     void splitPhrase() {
         string phrase = tok.value;
         istringstream iss(phrase);
         vector<string> tokens;
+        set<string> stopWords = getStopwords();
         copy(istream_iterator<string>(iss), istream_iterator<string>(), back_inserter(tokens));
         int cur = 0;
         for (int i = 0; i < tokens.size(); i++) {
