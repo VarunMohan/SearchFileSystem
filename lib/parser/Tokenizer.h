@@ -116,6 +116,7 @@ class Tokenizer {
     }
 
     Token curToken() {
+	if (index >= tokens.size()) return Token("NULL");
 	return tokens[index];
     }
 };
