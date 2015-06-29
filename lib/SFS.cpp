@@ -17,6 +17,7 @@ void index() {
 
 void search(int argc, char *argv[]) {
     map<string, PostingList> index = deserialize_index("serialized_inv_index");
+    vector<string> docidmaps = deserialize_doc_id_map("serialized_doc_id_map");
     string query = "";
     for (int i = 2; i < argc; i++)
 	query += string(argv[i]) + " ";
@@ -25,7 +26,7 @@ void search(int argc, char *argv[]) {
     DocIterator *it = e->getIterator(index);
     int curDocId;
     while ((curDocId = it->getDocID()) != DocIterator::MAX_DOCID) {
-	cout << curDocId << endl;
+	cout << docidmaps[curDocId] << endl;
 	it->next();
     }
     e->free();
