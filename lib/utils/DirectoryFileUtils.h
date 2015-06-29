@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const char * extensions[] = {"txt", "doc"};
+const char * extensions[] = {"txt", "doc","docx"};
 vector<string> valid_extensions(extensions, end(extensions));
 
 const char * badDirs[] = {"misc"};

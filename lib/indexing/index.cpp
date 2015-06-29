@@ -39,6 +39,7 @@ void index_files() {
         index_file(all_files[i].fullpath, i);
         index_term(all_files[i].name, i, 0);
         doc_id_to_path_map.push_back(all_files[i].fullpath);
+        cout << "INDEXED: "<< all_files[i].name << endl;
     }
 }
 
@@ -85,9 +86,13 @@ map<string, PostingList> deserialize_index(string fname) {
 
 int main(void) {
     index_files();
+    cout << endl;
+    cout << "SERIALIZING INDEX" << endl;
     serialize_index("serialized_inv_index");
+    cout << "SERIALIZING DOCUMENT MAPPING" << endl;
     serialize_doc_id_map("serialized_doc_id_map");
-    inv_index = deserialize_index("serialized_inv_index");
-    doc_id_to_path_map = deserialize_doc_id_map("serialized_doc_id_map");
-    print_index();
+    cout << "INDEXING COMPLETE" << endl;
+    //inv_index = deserialize_index("serialized_inv_index");
+    //doc_id_to_path_map = deserialize_doc_id_map("serialized_doc_id_map");
+    //print_index();
 }
