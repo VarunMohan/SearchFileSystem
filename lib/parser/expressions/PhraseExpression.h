@@ -12,8 +12,6 @@
 using namespace std;
 
 class PhraseExpression : public Expression {
- private:
-    Token tok;
  public:
     PhraseExpression(Token t) {
 	tok = t;

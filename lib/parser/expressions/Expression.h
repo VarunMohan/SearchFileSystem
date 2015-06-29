@@ -5,11 +5,14 @@
 #include <map>
 #include "../../datastructures/DocIterator.h"
 #include "../../datastructures/PostingList.h"
+#include "../Token.h"
 
 using namespace std;
 
 class Expression {
  public:
+    Token tok;
+
     Expression() {
 
     }
