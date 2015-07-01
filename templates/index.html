@@ -29,8 +29,8 @@
       $.ajax({
           type:"GET",
           url:"http://127.0.0.1:5000/index",
-	  success:function() {
-	      $("#output").val("INDEX BUID COMPLETE!");
+	  success:function(res) {
+	      $("#output").val(res);
 	  }
       });
   });

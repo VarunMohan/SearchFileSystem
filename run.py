@@ -17,7 +17,7 @@ def query():
 
 @app.route("/index", methods=["GET"])
 def indexQuery():
-    index()
+    return index()
 
 def index():
     return subprocess.Popen(["./executables/sfs", "index"], stdout=subprocess.PIPE).communicate()[0]
