@@ -27,7 +27,7 @@
 
     $("#indexbutton").click(function() {
       $.ajax({
-          type:"POST",
+          type:"GET",
           url:"http://127.0.0.1:5000/index",
 	  success:function() {
 	      $("#output").val("INDEX BUID COMPLETE!");

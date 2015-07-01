@@ -15,6 +15,10 @@ def query():
     q = request.form['query']
     return search(q)
 
+@app.route("/index", methods=["GET"])
+def indexQuery():
+    index()
+
 def index():
     return subprocess.Popen(["./executables/sfs", "index"], stdout=subprocess.PIPE).communicate()[0]
 
