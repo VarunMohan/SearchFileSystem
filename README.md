@@ -1,6 +1,6 @@
 SearchFileSystem (SFS)
 -----------------------------------
-Project allows you to index files in a particular directory and then query for them using a different API.
+Project allows you to index files in a local directory and then query for them using a different API similar to a search engine.
 
 Setup & Installation
 -----------------------------------
