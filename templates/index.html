@@ -7,10 +7,10 @@
 
 <body>
 
-  <button onclick="indexGen()">Generate Index</button> <br> <br>
-  <input id="query" type="text"></input><input id="querysubmit" type="submit"></input>
-
-<!-- #Query: <input type="text" id="field"><br><br> -->
+<button onclick="indexGen()">Generate Index</button> <br> <br>
+<input id="query" type="text"></input><input id="querysubmit" type="submit"></input>
+<br/><br/>
+<input id="output"></input>
 
 <script type="text/javascript" language="javascript">
   $("#querysubmit").click(function() {
@@ -18,7 +18,10 @@
       $.ajax({
           type:"POST",
           url:"http://127.0.0.1:5000/query",
-	  data:{"query":query}
+	  data:{"query":query},
+	  success:function(res) {
+	      $("#output").val(res);
+	  }
       });
   });
 

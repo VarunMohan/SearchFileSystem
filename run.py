@@ -13,7 +13,7 @@ def show():
 @app.route("/query", methods=["POST"])
 def query():
     q = request.form['query']
-    print("QUERY", q)
+    return search(q)
 
 def index():
     return subprocess.Popen(["./executables/sfs", "index"], stdout=subprocess.PIPE).communicate()[0]
