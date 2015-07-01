@@ -12,7 +12,7 @@ void index() {
     cout << "SERIALIZING DOCUMENT MAPPING" << endl;
     serialize_doc_id_map("serialized_doc_id_map");
     cout << "INDEXING COMPLETE" << endl;
-    print_index();
+    //print_index();
 }
 
 void search(int argc, char *argv[]) {
