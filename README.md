@@ -19,7 +19,7 @@ The results of the commands are output on the page after processing.
 
 Note that the commands can also be run through the command-line. 
 * To index, run <code> project-dir/executables/sfs index </code>
-* To query, run <code> project-dir/executables/sfs query "example_query" <code>
+* To query, run <code> project-dir/executables/sfs query "example_query" </code>
 
 Querying
 ------------------------------------
