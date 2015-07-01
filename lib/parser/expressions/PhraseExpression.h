@@ -37,8 +37,8 @@ class PhraseExpression : public Expression {
         for (int i = 0; i < tokens.size(); i++) {
             std::transform(tokens[i].begin(), tokens[i].end(), tokens[i].begin(), ::tolower);
             if (!stopWords.count(tokens[i])) {
-                terms.push_back(tokens[i]);
                 if (terms.size() >= 1) offsets.push_back(cur);
+                terms.push_back(tokens[i]);
                 cur = 1;
             } else {
                 cur++;

@@ -11,6 +11,7 @@ class IndexTokenizer {
 private:
     set<string> stopwordset;
     ifstream fileInput;
+    int absolutePosition;
 
     void readStopWords() {
 	stopwordset = getStopwords();
@@ -19,7 +20,6 @@ private:
     //Assumes the current file is at an alphanum char
     SFSToken nextTokenHelper() {
 	string token = "";
-	int position = this->fileInput.tellg();
 	char c;
 
 	while (is_alphanum(this->fileInput.peek())) {
@@ -27,7 +27,8 @@ private:
 	    token += tolower(c);
 	}
 	this->advanceToAlphanumChar();
-	return (SFSToken){token, position};
+	absolutePosition++;
+	return (SFSToken){token, absolutePosition};
     }
 
     bool is_alphanum(char c) {
@@ -46,6 +47,7 @@ private:
 public:
     //Takes a filename and initializes the IndexTokenizer
     IndexTokenizer(string fname) {
+    absolutePosition = 0;
 	this->fileInput.open(fname);
 	this->readStopWords();
 	this->advanceToAlphanumChar();
