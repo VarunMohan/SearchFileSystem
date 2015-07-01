@@ -7,7 +7,7 @@
 
 <body>
 
-<button onclick="indexGen()">Generate Index</button> <br> <br>
+<button id="indexbutton">Generate Index</button> <br> <br>
 <input id="query" type="text"></input><input id="querysubmit" type="submit"></input>
 <br/><br/>
 <input id="output"></input>
@@ -25,13 +25,15 @@
       });
   });
 
-
-function indexGen() {
-	console.log("HI");
-}
-function query() {
-    console.log(document.getElementById("field").value);
-}
+    $("#indexbutton").click(function() {
+      $.ajax({
+          type:"POST",
+          url:"http://127.0.0.1:5000/index",
+	  success:function() {
+	      $("#output").val("INDEX BUID COMPLETE!");
+	  }
+      });
+  });
 </script>
 
 </body>
