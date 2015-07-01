@@ -7,11 +7,22 @@
 
 <body>
 
-<button onclick="indexGen()">Generate Index</button> <br> <br>
+  <button onclick="indexGen()">Generate Index</button> <br> <br>
+  <input id="query" type="text"></input><input id="querysubmit" type="submit"></input>
 
 <!-- #Query: <input type="text" id="field"><br><br> -->
 
 <script type="text/javascript" language="javascript">
+  $("#querysubmit").click(function() {
+      query = $("#query").val();
+      $.ajax({
+          type:"POST",
+          url:"http://127.0.0.1:5000/query",
+	  data:{"query":query}
+      });
+  });
+
+
 function indexGen() {
 	console.log("HI");
 }

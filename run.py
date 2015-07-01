@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import sys
 import webbrowser
 import threading
@@ -9,6 +9,11 @@ app = Flask(__name__)
 @app.route("/")
 def show():
     return render_template('index.html')
+
+@app.route("/query", methods=["POST"])
+def query():
+    q = request.form['query']
+    print("QUERY", q)
 
 def index():
     return subprocess.Popen(["./executables/sfs", "index"], stdout=subprocess.PIPE).communicate()[0]
