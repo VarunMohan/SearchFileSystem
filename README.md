@@ -15,8 +15,8 @@ cd path_to_sfs_dir
 make sfs
 python run.py
 
--> click index
--> search query (E.G: "term1" OR "term2" AND "term3")
+- click index
+- search query (E.G: "term1" OR "term2" AND "term3")
 
 Querying
 ------------------------------------
