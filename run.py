@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import sys
 import webbrowser
 import threading
@@ -7,8 +7,8 @@ import subprocess
 app = Flask(__name__)
 
 @app.route("/")
-def hello():
-    return "Hello World!"
+def show():
+    return render_template('index.html')
 
 def index():
     return subprocess.Popen(["./executables/sfs", "index"], stdout=subprocess.PIPE).communicate()[0]
