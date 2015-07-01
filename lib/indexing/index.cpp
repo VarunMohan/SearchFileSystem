@@ -34,7 +34,7 @@ void index_file(string fullpath, int docid) {
 }
 
 void index_files() {
-    vector<sfsFile> all_files = getAllFiles(".");
+    vector<sfsFile> all_files = getAllFiles("..");
     for (int i=0; i < all_files.size(); i++) {
         index_file(all_files[i].fullpath, i);
         index_term(all_files[i].name, i, 0);
