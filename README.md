@@ -17,7 +17,7 @@ First <code>cd</code> to the project directory. Then, run <code>make sfs</code>,
 
 The results of the commands are output on the page after processing. 
 
-Note that the commands can also be run through the command-line. 
+Note that the commands can also be run through the command-line. This method is preferred since the above method is shown to provide slow performance.
 * To index, run <code> project-dir/executables/sfs index </code>
 * To query, run <code> project-dir/executables/sfs query "example_query" </code>
 
